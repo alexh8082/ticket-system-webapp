@@ -17,6 +17,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 const btnStyle = {
   backgroundColor: "black",
@@ -74,12 +75,12 @@ function TicketTable({
                       </td>
                     ))}
                     {onDelete && (
-                      <td>
+                      <td align={"center"}>
                         <button
                           className="button"
                           onClick={() => onDelete(obj)}
                         >
-                          Delete
+                          <DeleteIcon></DeleteIcon>
                         </button>
                       </td>
                     )}
