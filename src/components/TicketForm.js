@@ -6,7 +6,6 @@ import {
   HStack,
   CardHeader,
   Text,
-  Heading,
 } from "@chakra-ui/react";
 import { Select } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
@@ -35,25 +34,25 @@ function TicketForm({
 
   return (
     <div>
-      <Card backgroundColor="slategrey">
+      <Card backgroundColor="lightgray">
         <CardHeader backgroundColor="teal">
-          <Heading size="md">CREATE / UPDATE TICKET</Heading>
+          <Text fontSize={22}>CREATE / UPDATE TICKET</Text>
         </CardHeader>
-        <CardBody minH="500px" minW="753px">
+        <CardBody>
           <label htmlFor="id">ID</label>
           <Input
             placeholder="Ticket ID"
             type="number"
             value={id}
             name="id"
-            backgroundColor="seashell"
+            backgroundColor="white"
             disabled
           />
           <label htmlFor="summary">Summary</label>
           <Input
             placeholder="Enter Summary"
             type="text"
-            backgroundColor="seashell"
+            backgroundColor="white"
             name="summary"
             value={tSummary}
             onChange={(e) => setTSummary(e.target.value)}
@@ -63,7 +62,7 @@ function TicketForm({
           <Select
             placeholder="Select option"
             name="priority"
-            backgroundColor="seashell"
+            backgroundColor="white"
             value={tPriority}
             onChange={(e) => setTPriority(e.target.value)}
             disabled={readonly}
@@ -76,7 +75,7 @@ function TicketForm({
           <Select
             placeholder="Select option"
             name="status"
-            backgroundColor="seashell"
+            backgroundColor="white"
             value={tStatus}
             onChange={(e) => setTStatus(e.target.value)}
             disabled={readonly}
@@ -90,7 +89,7 @@ function TicketForm({
           <Input
             placeholder="Basic usage"
             type="date"
-            backgroundColor="seashell"
+            backgroundColor="white"
             value={formatDate(createDate)}
             name="createDate"
             disabled
@@ -99,7 +98,7 @@ function TicketForm({
           <Input
             placeholder="Basic usage"
             type="date"
-            backgroundColor="seashell"
+            backgroundColor="white"
             value={formatDate(updateDate)}
             name="updateDate"
             disabled

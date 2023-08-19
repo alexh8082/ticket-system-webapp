@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import TicketTable from "./components/TicketTable.js";
 import TicketForm from "./components/TicketForm";
-import { HStack } from "@chakra-ui/react";
+import { Button, HStack, useDisclosure } from "@chakra-ui/react";
 import {
   createTicket,
   deleteTicket,
@@ -10,6 +10,15 @@ import {
   updateTicket,
 } from "./service/ticketService";
 import { formatDate } from "./util/dateUtil";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react";
 
 const COLS = [
   "id",
@@ -21,6 +30,8 @@ const COLS = [
 ];
 
 function App() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const [tickets, setTickets] = useState([]);
   const [currentTicket, setCurrentTicket] = useState({});
 
@@ -85,37 +96,40 @@ function App() {
   }, []);
 
   return (
-    <HStack justifyContent="space-between" padding={4}>
-      <div>
-        <TicketTable
-          list={tickets}
-          colNames={COLS}
-          onSelect={loadTicket}
-          onDelete={sendDeleteRequest}
-        />
-      </div>
-      <div>
-        <TicketForm
-          id={currentTicket.id}
-          summary={currentTicket.summary}
-          priority={currentTicket.priority}
-          status={currentTicket.status}
-          createDate={
-            currentTicket.create_date
-              ? new Date(currentTicket.create_date)
-              : new Date()
-          }
-          updateDate={
-            currentTicket.update_date
-              ? new Date(currentTicket.update_date)
-              : new Date()
-          }
-          readonly={false}
-          onSubmit={sendSaveRequest}
-          onClear={unloadTicket}
-        />
-      </div>
-    </HStack>
+    <>
+      <TicketTable
+        list={tickets}
+        colNames={COLS}
+        onSelect={loadTicket}
+        onDelete={sendDeleteRequest}
+      />
+      <Button backgroundColor={"lightseagreen"} onClick={onOpen}>
+        Add Ticket
+      </Button>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalContent>
+          <TicketForm
+            id={currentTicket.id}
+            summary={currentTicket.summary}
+            priority={currentTicket.priority}
+            status={currentTicket.status}
+            createDate={
+              currentTicket.create_date
+                ? new Date(currentTicket.create_date)
+                : new Date()
+            }
+            updateDate={
+              currentTicket.update_date
+                ? new Date(currentTicket.update_date)
+                : new Date()
+            }
+            readonly={false}
+            onSubmit={sendSaveRequest}
+            onClear={unloadTicket}
+          />
+        </ModalContent>
+      </Modal>
+    </>
   );
 }
 

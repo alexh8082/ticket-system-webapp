@@ -46,10 +46,12 @@ function TicketTable({
     setPage(page + 1 < list.length / pageSize ? page + 1 : page);
   };
 
+  const openForm = () => {};
+
   return (
     <div>
       <Card backgroundColor="slategrey">
-        <CardHeader backgroundColor="seashell">
+        <CardHeader backgroundColor="whitesmoke">
           <Heading size="md">TICKET REGISTRY</Heading>
         </CardHeader>
         <CardBody minH="500px">
